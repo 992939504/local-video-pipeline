@@ -1,0 +1,10 @@
+# 模型权重放这个目录（体积大，不入库）
+models/
+
+# 中间产物
+work/
+
+# 系统杂项
+.DS_Store
+Thumbs.db
+desktop.ini
