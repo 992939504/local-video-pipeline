@@ -1,7 +1,7 @@
 ---
 name: local-video-pipeline
 description: Use when 用户要做一条竖屏视频（真人口播 / 全动画 / 混合都行）。本地流水线：声音、剪辑、动画、合成；AI 出图/出视频默认不装；先探测硬件选档，每步主动汇报。
-version: 1.0.0
+version: 1.1.0
 license: MIT
 metadata:
   tags: [video, local, tts, asr, ffmpeg, animation, qwen]
@@ -97,8 +97,8 @@ metadata:
 
 **两个动画工具都备上**（Remotion 不用预装，用到现拉）——哪个顺手用哪个；一个用不了，用另一个也能干活。
 
-> **额外加装（默认不装）**：AI 出图（ComfyUI ＋ 千问 Image 2.1）、AI 出视频片段（MiniMax H3）。
-> 用户明确要了再加；装之前先问。
+> **额外加装（默认不装）**：AI 出图、AI 出视频片段——要用本地生成，就走仓库里带的工作流
+> （`assets/workflows/`，说明在 `references/local-generation.md`）。用户明确要了再加；装之前先问。
 
 ## 3）下载模型（用户自己下）
 
@@ -211,9 +211,17 @@ metadata:
 
 ## 额外加装（默认不装，用户明确要了才加）
 
-- **AI 出图**（ComfyUI ＋ 千问 Image 2.1）：要配图 / 需要画面素材时。能做图片编辑，也能直接出透明底 PNG（提示词里写"透明背景"）。**先出一张**给用户看效果，确认了再批量；没显卡建议别碰。
-- **AI 出视频片段**（MiniMax H3，文生视频 / 图生视频）：要"动起来的画面"时——提示词基本只认英文；出的是几秒的短镜头，成不了整片；本地跑和云端服务两种用法都有——**走云端的素材会离开本机，先跟用户说清**。
-- 两样都吃显卡；装之前先问用户。
+要用**本地**出图 / 出视频，就走这两个工作流，别自己搭：
+
+| 要什么 | 工作流（仓库里） | 关键参数 |
+|---|---|---|
+| 出图 | `assets/workflows/qwen-image-t2i.json`（文生图）、`qwen-image-edit.json`（垫图改图） | ComfyUI ＋ 千问 Image 2.1 快版；竖屏 768×1344；先出一张再批量 |
+| 出视频 | `assets/workflows/h3lite-t2v.json`（文生视频）、`h3lite-i2v.json`（图生视频） | MiniMax H3 lite；640×352、124 帧 @24fps≈5.2 秒、4 步、带音频；**提示词必须英文** |
+
+模型清单、导入步骤、坑，全在 `references/local-generation.md`。
+
+- 两样都吃显卡；没显卡别碰。
+- 装之前先问用户；走云端的用法素材会离开本机，也要先说清。
 
 ---
 

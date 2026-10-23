@@ -37,9 +37,9 @@
 
 ### 额外加装（默认不装）
 
-- **AI 出图**（ComfyUI ＋ 千问 Image 2.1）——需要画面素材时；
-- **AI 出视频片段**（MiniMax H3 这类）——需要"动起来的画面"时（这种工具有的本地跑、有的走云端——走云端的素材会离开本机，用前先确认）；
-- 这两样最吃显卡，**默认不碰**，有额外需要再加。
+- **AI 出图**（ComfyUI ＋ 千问 Image 2.1）——需要画面素材时；工作流在 `assets/workflows/qwen-image-t2i.json`（文生图）和 `qwen-image-edit.json`（垫图改图）；
+- **AI 出视频片段**（MiniMax H3 lite）——需要"动起来的画面"时；工作流在 `assets/workflows/h3lite-t2v.json`（文生视频）和 `h3lite-i2v.json`（图生视频）；提示词要用英文，出的是几秒短镜头；
+- 这两样最吃显卡，**默认不碰**，有额外需要再加；模型清单和参数见 `references/local-generation.md`。
 
 ---
 
@@ -78,7 +78,7 @@ python3 --version   # 识别、配音的模型靠它跑（有的 Windows 上是 
 - 支持技能目录的 AI（Hermes / Claude Code / Codex 等）：把**整个文件夹**放进技能目录；
 - 普通在线 AI（ChatGPT / DeepSeek / Kimi 等）：把 `SKILL.md` 发给它当手册（它跑不了你电脑上的命令，会把每步要敲的东西写给你）。
 
-> ⚠️ 三件东西缺一不可：`README.md`（说明书）、`SKILL.md`（干活的手册）、`LICENSE`——**别只拿 README**，干活的本体是 `SKILL.md`。
+> ⚠️ 别只拿单个文件：`README.md`（说明书）、`SKILL.md`（干活的手册）、`LICENSE`，加上 `assets/workflows/`（出图、出视频的工作流）和 `references/`（说明）——**干活的本体是 `SKILL.md`**。
 
 装好后对它说一句：**「帮我装本地视频流水线的环境」**，剩下的它带你走。
 
@@ -99,7 +99,7 @@ python3 --version   # 识别、配音的模型靠它跑（有的 Windows 上是 
 
 ⚠️ **用官方模型，别用第三方打包的"精简版"**——那种经常砍掉组件（比如字级对齐），装完看着能用，字幕和动画对不上。
 
-> 额外加装的 AI 出图要用千问 Image 2.1（Qwen-Image 2.1）＋ ComfyUI——默认不装，有需要再加。
+> 额外加装的 AI 出图要用千问 Image 2.1（Qwen-Image 2.1）＋ ComfyUI——默认不装；工作流和模型清单在仓库里（`assets/workflows/`、`references/local-generation.md`）。
 
 ### 第 2 步 · 装好了，怎么用
 
